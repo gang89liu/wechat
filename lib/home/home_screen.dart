@@ -10,9 +10,12 @@ class NavigationIconView {
   NavigationIconView(
       {Key key, String title, IconData icon, IconData activeIcon})
       : item = BottomNavigationBarItem(
-          icon: Icon(icon),
-          activeIcon: Icon(activeIcon),
-          title: Text(title),
+          icon: Icon(icon, color: Color(AppColors.TabIconNormal)),
+          activeIcon: Icon(activeIcon,color: Color(AppColors.TabIconActive)),
+          title: Text(title, style: TextStyle(
+            fontSize: 14.0,
+            color: Color(AppColors.TabIconNormal)
+          )),
           backgroundColor: Colors.white,
         );
 }
