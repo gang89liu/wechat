@@ -89,6 +89,16 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text('微信'),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () => print('点击了搜索按钮'),
+            ),
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () => print('显示下拉列表'),
+            )
+          ],
         ),
         body: Container(color: Colors.red),
         bottomNavigationBar: botNavBar,

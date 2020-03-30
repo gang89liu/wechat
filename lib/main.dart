@@ -5,9 +5,7 @@ import './home/home_screen.dart';
 void main() => runApp(MaterialApp(
       title: '微信',
       theme: ThemeData.light().copyWith(
-        primaryColor: Color(AppColors.PrimaryColor),
-        cardColor: const Color(AppColors.CardBgColor),
-        backgroundColor: Color(AppColors.BackgroundColor),
+        primaryColor: Color(0xff303030),
       ),
       home: HomeScreen(),
  
