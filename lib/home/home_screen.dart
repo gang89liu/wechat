@@ -4,6 +4,8 @@ import '../constants.dart' show Constants, AppColors, AppStyles;
 
 import '../i18n/strings.dart' show Strings;
 
+enum ActionItems { GROUP_CHAT, ADD_FRIEND, QR_SCAN, PAYMENT, HELP }
+
 class NavigationIconView {
   final BottomNavigationBarItem item;
 
@@ -76,6 +78,22 @@ class _HomeScreenState extends State<HomeScreen> {
           )),
     ];
   }
+  _buildPopupMenuItem(int iconName, String title) {
+    return Row(
+      children: <Widget>[
+        Icon(IconData(
+                      iconName,
+                      fontFamily: Constants.IconFontFamily,
+                    ),
+                    size: 22.0,
+                      color: Color(AppColors.ActionIconColor)
+                    ),
+        Container(width: 12.0,),
+        Text(title,
+          style: TextStyle(color: const Color(AppColors.ActionIconColor)),)
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,15 +110,63 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text('微信'),
+          elevation: 0.0,
+          brightness: Brightness.light,
+          backgroundColor: const Color(AppColors.BackgroundColor),
           actions: [
             IconButton(
-              icon: Icon(Icons.search),
+              icon: Icon(IconData(
+                0xe65e,
+                fontFamily: Constants.IconFontFamily
+              ),
+                  color: Color(AppColors.ActionIconColor),
+              size: 22.0),
               onPressed: () => print('点击了搜索按钮'),
             ),
-            IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () => print('显示下拉列表'),
-            )
+            Container(width: 16.0,),
+            PopupMenuButton(
+              itemBuilder: (BuildContext context) {
+                return <PopupMenuItem<ActionItems>>[
+                  PopupMenuItem(
+                    child: _buildPopupMenuItem(0xe69e,'发起群聊'),
+                    value: ActionItems.GROUP_CHAT
+                  ),
+                  PopupMenuItem(
+                    child: _buildPopupMenuItem(0xe638,'添加朋友'),
+                    value: ActionItems.ADD_FRIEND
+                  ),
+                  PopupMenuItem(
+                    child: _buildPopupMenuItem(0xe61b,'扫一扫'),
+                    value: ActionItems.QR_SCAN
+                  ),PopupMenuItem(
+                    child: _buildPopupMenuItem(0xe62a,'收付款'),
+                    value: ActionItems.PAYMENT
+                  ),PopupMenuItem(
+                    child: _buildPopupMenuItem(0xe63d,'帮助与反馈'),
+                    value: ActionItems.HELP
+                  )
+                ];
+              },
+              onSelected: (ActionItems selected) => print('点击的是$selected'),
+              icon: Icon(IconData(
+                  0xe616,
+                  fontFamily: Constants.IconFontFamily),
+                  color: Color(AppColors.ActionIconColor),
+                  size: 22.0),
+                 
+            ),
+            Container(width: 16.0,)
+
+            // Container(
+            //   padding: const EdgeInsets.symmetric(horizontal: 16),
+            //   child: IconButton(
+            //     icon: Icon(IconData(
+            //       0xe616,
+            //       fontFamily: Constants.IconFontFamily),
+            //       size: 22.0),
+            //       onPressed: () => print('显示下拉列表'),
+            //     )
+            //   ),
           ],
         ),
         body: Container(color: Colors.red),
