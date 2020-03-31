@@ -30,6 +30,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<NavigationIconView> _navigationViews;
+  int _currentIndex = 0;
 
   @override
   void initState() {
@@ -86,11 +87,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontFamily: Constants.IconFontFamily,
                     ),
                     size: 22.0,
-                      color: Color(AppColors.ActionIconColor)
+                      color: const Color(AppColors.AppBarPopupMenuColor)
                     ),
         Container(width: 12.0,),
         Text(title,
-          style: TextStyle(color: const Color(AppColors.ActionIconColor)),)
+          style: TextStyle(color: const Color(AppColors.AppBarPopupMenuColor)),)
       ],
     );
   }
@@ -101,16 +102,19 @@ class _HomeScreenState extends State<HomeScreen> {
       items: _navigationViews.map<BottomNavigationBarItem>((NavigationIconView view) {
         return view.item;
       }).toList(),
-      currentIndex: 0,
+      currentIndex: _currentIndex,
       type: BottomNavigationBarType.fixed,
       onTap: (int index) {
+        setState(() {
+        _currentIndex = index;
+        });
         print('点击的是第$index个Tab');
       },
     );
     return Scaffold(
         appBar: AppBar(
           title: Text('微信'),
-          elevation: 0.0,
+          elevation: 0.0,// 阴影
           brightness: Brightness.light,
           backgroundColor: const Color(AppColors.BackgroundColor),
           actions: [
@@ -156,17 +160,6 @@ class _HomeScreenState extends State<HomeScreen> {
                  
             ),
             Container(width: 16.0,)
-
-            // Container(
-            //   padding: const EdgeInsets.symmetric(horizontal: 16),
-            //   child: IconButton(
-            //     icon: Icon(IconData(
-            //       0xe616,
-            //       fontFamily: Constants.IconFontFamily),
-            //       size: 22.0),
-            //       onPressed: () => print('显示下拉列表'),
-            //     )
-            //   ),
           ],
         ),
         body: Container(color: Colors.red),
