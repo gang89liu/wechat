@@ -10,7 +10,7 @@ class Conversation {
     this.titleColor : AppColors.ConversationTitleColor,
     this.des,
     @required this.updateAt,
-    this.isMute,
+    this.isMute: false,
     this.unreadMsgCount: 0,
     this.displayDot: false
   }
@@ -27,6 +27,10 @@ class Conversation {
   final int titleColor;
   final int unreadMsgCount;
   final bool displayDot;
+
+  bool isAvatarFromNet() {
+    return avatar.startsWith("http");
+  }
 }
 
 const List<Conversation> mockConversations = [
