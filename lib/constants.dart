@@ -12,6 +12,7 @@ class AppColors {
   static const AppBarPopupMenuColor = 0xffffffff;
   static const TitleColor = 0xff181818;
   static const ConversationItemBg = 0xffffffff;
+  static const ConversationTitleColor = 0xff000000;
   static const DesTextColor = 0xff999999;
   static const DividerColor = 0xffd5d5d5;
   static const NotifyDotBg = 0xfff85351;
