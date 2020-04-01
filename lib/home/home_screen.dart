@@ -12,12 +12,9 @@ class NavigationIconView {
   NavigationIconView(
       {Key key, String title, IconData icon, IconData activeIcon})
       : item = BottomNavigationBarItem(
-          icon: Icon(icon, color: Color(AppColors.TabIconNormal)),
-          activeIcon: Icon(activeIcon,color: Color(AppColors.TabIconActive)),
-          title: Text(title, style: TextStyle(
-            fontSize: 14.0,
-            color: Color(AppColors.TabIconNormal)
-          )),
+          icon: Icon(icon),
+          activeIcon: Icon(activeIcon),
+          title: Text(title),
           backgroundColor: Colors.white,
         );
 }
@@ -30,6 +27,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<NavigationIconView> _navigationViews;
+  PageController _pageController;
+  List<Widget> _pages;
   int _currentIndex = 0;
 
   @override
@@ -78,6 +77,14 @@ class _HomeScreenState extends State<HomeScreen> {
             fontFamily: Constants.IconFontFamily,
           )),
     ];
+
+    _pageController = PageController(initialPage: _currentIndex);
+    _pages = [
+      Container(color: Colors.red),
+      Container(color: Colors.green),
+      Container(color: Colors.blue),
+      Container(color: Colors.brown),
+    ];
   }
   _buildPopupMenuItem(int iconName, String title) {
     return Row(
@@ -99,6 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final BottomNavigationBar botNavBar = BottomNavigationBar(
+      fixedColor: const Color(AppColors.TabIconActive),
       items: _navigationViews.map<BottomNavigationBarItem>((NavigationIconView view) {
         return view.item;
       }).toList(),
@@ -108,6 +116,10 @@ class _HomeScreenState extends State<HomeScreen> {
         setState(() {
         _currentIndex = index;
         });
+
+        _pageController.animateToPage(_currentIndex
+          , duration: Duration(microseconds: 200)
+          , curve: Curves.easeInOut);
         print('点击的是第$index个Tab');
       },
     );
@@ -162,7 +174,19 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(width: 16.0,)
           ],
         ),
-        body: Container(color: Colors.red),
+        body: PageView.builder(
+          itemBuilder: (BuildContext context, int index) {
+            return _pages[index];
+          },
+          controller: _pageController,
+          itemCount: _pages.length,
+          onPageChanged: (int index) {
+            setState(() {
+              _currentIndex = index;
+            });
+            print('当前显示的是第$index页');
+          },
+          ),
         bottomNavigationBar: botNavBar,
         );
   }
