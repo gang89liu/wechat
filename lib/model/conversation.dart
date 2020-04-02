@@ -2,22 +2,21 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart' show AppColors;
 
+enum Device { MAC, WIN }
 
 class Conversation {
-  const Conversation({
-    @required this.avatar,
-    @required this.title,
-    this.titleColor : AppColors.ConversationTitleColor,
-    this.des,
-    @required this.updateAt,
-    this.isMute: false,
-    this.unreadMsgCount: 0,
-    this.displayDot: false
-  }
-  ): assert(avatar != null),
-     assert(title != null),
-     assert(updateAt != null)
-     ;
+  const Conversation(
+      {@required this.avatar,
+      @required this.title,
+      this.titleColor: AppColors.ConversationTitleColor,
+      this.des,
+      @required this.updateAt,
+      this.isMute: false,
+      this.unreadMsgCount: 0,
+      this.displayDot: false})
+      : assert(avatar != null),
+        assert(title != null),
+        assert(updateAt != null);
 
   final String avatar;
   final String title;
@@ -33,8 +32,21 @@ class Conversation {
   }
 }
 
-const List<Conversation> mockConversations = [
-  const Conversation(
+class ConversationPageData {
+  const ConversationPageData({
+    this.device,
+    this.conversations,
+  });
+
+  final Device device;
+  final List<Conversation> conversations;
+  static mock() {
+    return ConversationPageData(
+        device: Device.WIN, conversations: mockConversations);
+  }
+
+  static List<Conversation> mockConversations = [
+    const Conversation(
         avatar: 'assets/images/ic_file_transfer.png',
         title: '文件传输助手',
         des: '',
@@ -133,4 +145,5 @@ const List<Conversation> mockConversations = [
       isMute: false,
       unreadMsgCount: 0,
     ),
-];
+  ];
+}

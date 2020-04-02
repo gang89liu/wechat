@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wechat/home/contacts.dart';
 
 import '../constants.dart' show Constants, AppColors, AppStyles;
 
@@ -82,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _pageController = PageController(initialPage: _currentIndex);
     _pages = [
       ConversationPage(),
-      Container(color: Colors.green),
+      ContactPage(),
       Container(color: Colors.blue),
       Container(color: Colors.brown),
     ];
