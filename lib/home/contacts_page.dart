@@ -35,7 +35,8 @@ class _ContactItem extends StatelessWidget {
 
     // 列表项主体部分
     Widget _button = Container(
-      padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 10.0, bottom: 10.0),
+      margin: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
       decoration: BoxDecoration(
           border: Border(
               bottom: BorderSide(
@@ -69,6 +70,37 @@ class _ContactItem extends StatelessWidget {
     return _itemBody;
   }
 }
+
+const INDEX_BAR_WORDS = [
+  "↑",
+  "☆",
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z"
+];
 
 class ContactPage extends StatefulWidget {
   ContactPage({Key key}) : super(key: key);
@@ -121,7 +153,14 @@ class _ContactPageState extends State<ContactPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    final List<Widget> _letters = INDEX_BAR_WORDS.map((String word) {
+      return Expanded(
+        child: Text(word),
+      );
+    }).toList();
+    return Stack(
+      children: <Widget>[
+        ListView.builder(
       itemBuilder: (BuildContext context, int index) {
         if (index < _functionButton.length) {
           return _functionButton[index];
@@ -140,6 +179,17 @@ class _ContactPageState extends State<ContactPage> {
         );
       },
       itemCount: _contacts.length + _functionButton.length,
+    ),
+    Positioned(
+      width: Constants.IndexBarWidth,
+      right: 0.0,
+      top: 0.0,
+      bottom: 0.0,
+      child: Column(
+        children: _letters
+      ),
+    )
+      ],
     );
   }
 }
