@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wechat/home/contacts.dart';
+import 'package:wechat/home/contacts_page.dart';
 
 import '../constants.dart' show Constants, AppColors, AppStyles;
 
